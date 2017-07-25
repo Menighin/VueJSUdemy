@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <div id="exercise">
+            <!-- 1) Start the Effect with the Button. The Effect should alternate the "highlight" or "shrink" class on each new setInterval tick (attach respective class to the div with id "effect" below) -->
+            <div>
+                <button @click="startEffect">Start Effect</button>
+                <div id="effect" :class="mushroomEffect"></div>
+            </div>
+            <!-- 2) Create a couple of CSS classes and attach them via the array syntax -->
+            <div :class="['bold', 'sans-serif', mushroomEffect]">I got no class :(</div>
+            <!-- 3) Let the user enter a class (create some example classes) and attach it -->
+            <div>
+                <input type="text" v-model="className">
+                <div :class="className">This is defined by input</div>
+            </div>
+            <!-- 4) Let the user enter a class and enter true/ false for another class (create some example classes) and attach the classes -->
+            <div>
+                <input type="text" v-model="className">
+                <input type="text" v-model="trueProp">
+                <div :class="[trueOrFalse, className]">Test for true/false and input</div>
+            </div>
+            <!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
+            <div>
+                <input type="text" v-model="styleInputBackground">
+                <div :style="styleInput">Style tag!</div>
+            </div>
+            <!-- 6) Create a simple progress bar with setInterval and style bindings. Start it by hitting the below button. -->
+            <div>
+                <button @click="startProgress">Start Progress</button>
+                <div :style="progressBarStyle"></div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>
