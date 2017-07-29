@@ -10,9 +10,9 @@
 
 <script>
     
-    import Header from './Header.vue';
-    import Body from './Body.vue';
-    import Footer from './Footer.vue';
+    import Header from './components/Header.vue';
+    import Body from './components/Body.vue';
+    import Footer from './components/Footer.vue';
 
     export default {
         components: {
