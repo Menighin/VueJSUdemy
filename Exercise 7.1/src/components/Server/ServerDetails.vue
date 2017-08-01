@@ -7,7 +7,6 @@
             <button @click="changeStatus">Change status</button>
         </template>
     </div>
-
 </template>
 
 <script>
@@ -23,7 +22,6 @@
         methods: {
             changeStatus() {
                 this.server.status = 'Normal*';
-                eventStatus.changeStatus(this.server);
             }
         },
         created() {

@@ -17,12 +17,6 @@
             selectServer() {
                 eventBus.selectServer(this.server);
             }
-        },
-        created() {
-            eventBus.$on('changeStatus', (server) => {
-                if (this.server.id == server.id)
-                    this.server.status = server.status;
-            });
         }
     }
 </script>
