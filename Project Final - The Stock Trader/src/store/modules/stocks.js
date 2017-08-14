@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 const state = {
     stocks: []
 };
@@ -5,21 +7,22 @@ const state = {
 const mutations = {
     setStocks(state, stocks) {
         state.stocks = stocks;
-    },
-    randomStocks(state) {
-
     }
 };
 
 const actions = {
-    buyStock: ({ commit }, order) => {
-        commit();
-    },
-    initStocks: ({ commit }) => {
-        commit('setStocks', []);
-    },
-    randomizeStocks: ({ commit }) => {
-        commit('randomStocks');
+    fetchStocks({ commit }) {
+        Vue.http.get('http://localhost:8000/stocks')
+            .then((response) => {
+                return response.json();
+            })
+            .then(json => {
+                commit('setStocks', json);
+            })
+            .catch((error => {
+                console.log('Error: ' + error.statusText);
+                console.log(error);
+            }));
     }
 };
 

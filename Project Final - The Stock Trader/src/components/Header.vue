@@ -19,9 +19,22 @@
                             <li><a href="#">Load Data</a></li>
                         </ul>
                     </li>
+                    <li>{{ money }}</li>
                 </ul>
             </div>
             
         </div>
     </nav>
 </template>
+
+<script>
+
+    export default {
+        computed: {
+            money() {
+                return this.$store.getters.getMoney;
+            }
+        }
+    }
+
+</script>
