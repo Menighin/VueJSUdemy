@@ -3,6 +3,11 @@
         <div class="panel panel-primary">
             <div class="panel-heading stock-title" :style="buyAnimating">
                 <h3 class="panel-title">
+                    <small>
+                        <span style="color: #82ff82" class="fa fa-long-arrow-up" v-if="stock.status === 'up'"></span>
+                        <span style="color: #ff5e5e" class="fa fa-long-arrow-down" v-else-if="stock.status === 'down'"></span>
+                        <span class="fa fa-circle" v-else></span>
+                    </small>
                     {{ stock.name }}
                     <small>(Price: {{ stock.price }}) </small>
                     <small class="pull-right" v-if="quantity.length > 0" :style="{ color: canBuy ? 'white' : '#ff9898'}">Total: ${{ total }}</small>

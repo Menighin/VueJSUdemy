@@ -15,6 +15,16 @@ export default new Vuex.Store({
             return state.money;
         }
     },
+    mutations: {
+        setMoney(state, money) {
+            state.money = money;
+        }
+    },
+    actions: {
+        setMoney( { commit }, { money }) {
+            commit('setMoney', money);
+        }
+    },
     modules: {
         stocks,
         portfolio

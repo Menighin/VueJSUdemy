@@ -11,15 +11,15 @@
                     <router-link to="/stocks" activeClass="active" tag="li"><a>Stocks</a></router-link>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">End Day</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save & Load <span class="caret"></span></a>
+                    <li><a href="#" @click="endDay">End Day</a></li>
+                    <li class="dropdown" :class="{ open: menuDropdown }">
+                        <a href="#" @click="menuDropdown = !menuDropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save & Load <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Save Data</a></li>
-                            <li><a href="#">Load Data</a></li>
+                            <li><a href="#" @click="saveData">Save Data</a></li>
+                            <li><a href="#" @click="loadData">Load Data</a></li> 
                         </ul>
                     </li>
-                    <li>{{ money }}</li>
+                    <li><a href="#">${{ money }}</a></li>
                 </ul>
             </div>
             
@@ -30,9 +30,39 @@
 <script>
 
     export default {
+        data() {
+            return {
+                menuDropdown: false
+            }
+        },
+        methods: {
+            saveData() {
+                let state = {
+                    portfolio: this.portfolio,
+                    money: this.money
+                };
+                this.$http.post('state', state);
+            },
+            loadData() {
+                this.$http.get('state')
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(json => {
+                        this.$store.dispatch('setPortfolio', json);
+                        this.$store.dispatch('setMoney', json);
+                    });
+            },
+            endDay() {
+                this.$store.dispatch("fetchStocks");
+            }
+        },
         computed: {
             money() {
                 return this.$store.getters.getMoney;
+            },
+            portfolio() {
+                return this.$store.getters.portfolio;
             }
         }
     }

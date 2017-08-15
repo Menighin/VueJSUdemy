@@ -1,8 +1,13 @@
 <template>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-success">
-            <div class="panel-heading stock-title">
+            <div class="panel-heading stock-title" :style="sellAnimating">
                 <h3 class="panel-title">
+                    <small>
+                        <span style="color:#21d621" class="fa fa-long-arrow-up" v-if="stock.status === 'up'"></span>
+                        <span style="color: red" class="fa fa-long-arrow-down" v-else-if="stock.status === 'down'"></span>
+                        <span class="fa fa-circle" v-else></span>
+                    </small>
                     {{ stock.name }}
                     <small>(Price: {{ stock.price }}) (Quantity: {{ stock.quantity }}) </small>
                 </h3>
@@ -24,17 +29,28 @@
     export default {
         data() {
             return {
-                quantity: ''
+                quantity: '',
+                sellAnimation: false
             }
         },
         computed: {
+            sellAnimating() {
+                if (this.sellAnimation === true) {
+                    setTimeout( () => this.sellAnimation = false, 400);
+                    return { backgroundColor: '#baff9d' };
+                }
+
+                return {};
+            },
             canSell() {
                 return this.quantity.length > 0 && this.quantity <= this.stock.quantity;
             }
         },
         methods: {
             sell() {
-                
+                this.$store.dispatch("sellStock", { salesOrder: {name: this.stock.name, price: this.stock.price, quantity: parseInt(this.quantity)} });
+                this.quantity = '';
+                this.sellAnimation = true;
             }
         },
         props: {
@@ -45,5 +61,7 @@
 </script>
 
 <style>
-
+    .stock-title {
+        transition: background-color 0.3s ease;
+    }
 </style>

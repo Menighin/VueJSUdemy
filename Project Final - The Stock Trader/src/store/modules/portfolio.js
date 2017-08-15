@@ -17,6 +17,17 @@ const mutations = {
         if (!found)
             state.portfolio.push(buyOrder);
 
+    },
+    sellStock(state, salesOrder) {
+        for (var i = 0; i < state.portfolio.length; i++) {
+            if (state.portfolio[i].name === salesOrder.name) {
+                state.portfolio[i].quantity -= salesOrder.quantity;
+                break;
+            }
+        }
+    },
+    setPortfolio(state, portfolio) {
+        state.portfolio = portfolio;
     }
 };
 
@@ -24,6 +35,13 @@ const actions = {
     buyStock({ commit, rootState }, { buyOrder }) {
         commit('buyStock', buyOrder);
         rootState.money -= buyOrder.price * buyOrder.quantity;
+    },
+    sellStock({ commit, rootState }, { salesOrder }) {
+        commit('sellStock', salesOrder);
+        rootState.money += salesOrder.price * salesOrder.quantity;
+    },
+    setPortfolio({ commit }, { portfolio }) {
+        commit('setPortfolio', portfolio);
     }
 };
 

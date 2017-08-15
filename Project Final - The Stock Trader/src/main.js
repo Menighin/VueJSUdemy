@@ -8,6 +8,8 @@ import store from './store/store';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+Vue.http.options.root = 'http://localhost:8000';
+
 const router = new VueRouter({
     mode: 'history',
     routes

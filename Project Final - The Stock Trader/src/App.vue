@@ -19,7 +19,7 @@
             appHeader: Header
         },
         created() {
-            this.$store.dispatch("fetchStocks")
+            this.$store.dispatch("fetchStocks");
         }
     }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="stock in portfolio">
+        <div v-for="stock in portfolio" v-if="stock.quantity > 0">
             <app-stock :stock="stock"></app-stock>
         </div>
     </div>
@@ -22,12 +22,13 @@
                 var stocks = this.$store.getters.stocks;
 
                 var stocksMap = stocks.reduce((result, stock) => {
-                    result[stock.name] = stock.price;
+                    result[stock.name] = { price: stock.price, status: stock.status };
                     return result;
                 }, {});
 
                 return portfolio.map(stock => {
-                    stock.price = stocksMap[stock.name];
+                    stock.price = stocksMap[stock.name].price;
+                    stock.status = stocksMap[stock.name].status;
                     return stock;
                 });
             }
