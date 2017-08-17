@@ -1,5 +1,6 @@
 const state = {
-    portfolio: []
+    portfolio: [],
+    portfolioHistory: []
 };
 
 const mutations = {
@@ -28,6 +29,9 @@ const mutations = {
     },
     setPortfolio(state, portfolio) {
         state.portfolio = portfolio;
+    },
+    addPortfolioHistory(state) {
+        state.portfolioHistory.push(JSON.parse(JSON.stringify(state.portfolio)));
     }
 };
 
@@ -42,12 +46,18 @@ const actions = {
     },
     setPortfolio({ commit }, { portfolio }) {
         commit('setPortfolio', portfolio);
+    },
+    addPortfolioHistory({ commit }) {
+        commit('addPortfolioHistory');
     }
 };
 
 const getters = {
     portfolio: state => {
         return state.portfolio;
+    },
+    portfolioHistory: state => {
+        return state.portfolioHistory;
     }
 };
 

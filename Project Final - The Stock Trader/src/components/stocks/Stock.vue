@@ -9,8 +9,8 @@
                         <span class="fa fa-circle" v-else></span>
                     </small>
                     {{ stock.name }}
-                    <small>(Price: {{ stock.price }}) </small>
-                    <small class="pull-right" v-if="quantity.length > 0" :style="{ color: canBuy ? 'white' : '#ff9898'}">Total: ${{ total }}</small>
+                    <small>(Price: {{ stock.price | currency }}) </small>
+                    <small class="pull-right" v-if="quantity.length > 0" :style="{ color: canBuy ? 'white' : '#ff9898'}">Total: {{ total | currency }}</small>
                 </h3>
             </div>
             <div class="panel-body">

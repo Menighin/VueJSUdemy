@@ -2,13 +2,17 @@ import Vue from 'vue';
 
 const state = {
     stocks: [],
-    yesterdayStocks: []
+    yesterdayStocks: [],
+    stocksHistory: []
 };
 
 const mutations = {
     setStocks(state, stocks) {
         state.yesterdayStocks = JSON.parse(JSON.stringify(state.stocks));
         state.stocks = stocks;
+    },
+    addStocksHistory(state) {
+        state.stocksHistory.push(JSON.parse(JSON.stringify(state.stocks)));
     }
 };
 
@@ -25,6 +29,9 @@ const actions = {
                 console.log('Error: ' + error.statusText);
                 console.log(error);
             }));
+    },
+    addStocksHistory({ commit }) {
+        commit('addStocksHistory');
     }
 };
 
@@ -43,6 +50,9 @@ const getters = {
         }
 
         return state.stocks;
+    },
+    stocksHistory: state => {
+        return state.stocksHistory;
     }
 };
 

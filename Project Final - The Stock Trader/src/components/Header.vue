@@ -11,7 +11,7 @@
                     <router-link to="/stocks" activeClass="active" tag="li"><a>Stocks</a></router-link>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" @click="endDay">End Day</a></li>
+                    <li><a href="#" @click="endDay">End Day ({{dayNumber}})</a></li>
                     <li class="dropdown" :class="{ open: menuDropdown }">
                         <a href="#" @click="menuDropdown = !menuDropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save & Load <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -19,7 +19,7 @@
                             <li><a href="#" @click="loadData">Load Data</a></li> 
                         </ul>
                     </li>
-                    <li><a href="#">${{ money }}</a></li>
+                    <li><a href="#">{{ money | currency}}</a></li>
                 </ul>
             </div>
             
@@ -32,7 +32,8 @@
     export default {
         data() {
             return {
-                menuDropdown: false
+                menuDropdown: false,
+                dayNumber: 1
             }
         },
         methods: {
@@ -54,7 +55,9 @@
                     });
             },
             endDay() {
-                this.$store.dispatch("fetchStocks");
+                this.dayNumber++;
+                this.$store.dispatch('fetchStocks');
+                this.$store.dispatch('addStocksHistory');
             }
         },
         computed: {

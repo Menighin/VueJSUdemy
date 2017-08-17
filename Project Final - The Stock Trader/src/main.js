@@ -10,6 +10,10 @@ Vue.use(VueResource);
 
 Vue.http.options.root = 'http://localhost:8000';
 
+Vue.filter('currency', function(value) {
+    return '$' + value.toLocaleString();
+});
+
 const router = new VueRouter({
     mode: 'history',
     routes

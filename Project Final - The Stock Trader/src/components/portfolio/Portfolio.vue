@@ -1,8 +1,6 @@
 <template>
     <div>
-        <div v-for="stock in portfolio" v-if="stock.quantity > 0">
-            <app-stock :stock="stock"></app-stock>
-        </div>
+        <app-stock v-for="stock in portfolio" v-if="stock.quantity > 0" :stock="stock"></app-stock>
     </div>
 </template>
 

@@ -9,7 +9,7 @@
                         <span class="fa fa-circle" v-else></span>
                     </small>
                     {{ stock.name }}
-                    <small>(Price: {{ stock.price }}) (Quantity: {{ stock.quantity }}) </small>
+                    <small>(Price: {{ stock.price | currency }} | Quantity: {{ stock.quantity }}) </small>
                 </h3>
             </div>
             <div class="panel-body">
